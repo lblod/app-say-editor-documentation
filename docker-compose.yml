@@ -1,0 +1,24 @@
+version: '3.4'
+
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  frontend:
+    image: semtech/ember-proxy-service:1.4.0
+    links:
+      - identifier:backend
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  identifier:
+    image: semtech/mu-identifier:1.6.1
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
