@@ -12,6 +12,8 @@ services:
     image: semtech/ember-proxy-service:1.4.0
     links:
       - identifier:backend
+    environment:
+      STATIC_FOLDERS_REGEX: "^/(assets|fonts|font)/"
     restart: always
     labels:
       - "logging=true"
